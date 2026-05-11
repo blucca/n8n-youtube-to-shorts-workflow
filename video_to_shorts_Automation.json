@@ -272,7 +272,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"functionName\": \"VideoShorts\",\n  \"youtubeVideoId\": \"{{ $('preparingField').item.json.videoId }}\",\n  \"videoSource\":\"{{ $json.videoSource }}\"\n} ",
+        "jsonBody": "={\n  \"functionName\": \"VideoShorts\",\n  \"options\": {\n    \"youtubeVideoId\": \"{{ $('preparingField').item.json.videoId }}\"\n  },\n  \"webhook\": \"\"\n}",
         "options": {}
       },
       "id": "4e9d1e41-2e70-4c50-8c40-3837d00da9f9",
@@ -312,7 +312,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"id\": \"{{ $('current_item_ref').item.json.id }}\",\n  \"target\":  {{ $json['data.shorts'].id }},\n  \"{{ $json.stylingType }}\": {{ $json.styling.toJsonString() }}\n} ",
+        "jsonBody": "={\n  \"shortId\": {{ $('current_item_ref').item.json['data.shorts'].id }},\n  \"renderOptions\": {{ $json.styling }}\n}",
         "options": {}
       },
       "id": "2a429e8c-2af2-4d81-99d2-7d3bf68770da",
@@ -683,8 +683,8 @@
           "conditions": [
             {
               "id": "f7b8572e-69f8-417f-ba5f-9635ff9d764e",
-              "leftValue": "={{ $json.type }}",
-              "rightValue": "done",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "COMPLETED",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -716,8 +716,8 @@
           "conditions": [
             {
               "id": "cfa65f82-c434-41f8-8c93-ae0057921c76",
-              "leftValue": "={{ $json.type }}",
-              "rightValue": "error",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "FAILED",
               "operator": {
                 "type": "string",
                 "operation": "equals",

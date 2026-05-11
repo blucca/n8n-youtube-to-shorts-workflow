@@ -70,11 +70,20 @@ Before you start, ensure you have the following:
     *   (Optional) Caption styling information (as required by your video service)
 4.  Submit the form. n8n will start the process.
 
+## API Version
+
+This workflow targets the **current Swiftia API** (`functionName: "VideoShorts"` with `options` wrapper).  
+See the `generateShorts` and `renderShort` nodes for the exact request format.
+
 ## Important Notes
 
 *   **Costs:** Be mindful of potential costs associated with your chosen video processing service, the YouTube Data API (beyond free quotas), and your LLM provider.
 *   **Testing:** **Strongly recommended:** Initially set the `privacyStatus` in the `setupMetaData` node to `private` for testing purposes before using `publishAt` for scheduled public/unlisted shorts.
 *   **Error Handling:** This template has basic checks but can be enhanced with more robust error handling using n8n's built-in features.
+*   **Swiftia API changes:** If the API updates again, the key nodes to watch are:
+    *   `generateShorts` — POST `/api/jobs` with `functionName` and `options`
+    *   `renderShort` — POST `/api/render` with `shortId` and `renderOptions`
+    *   Status checks — `isError ?` and `iscompleted ?` compare against `$json.status`
 
 ## Customization
 
